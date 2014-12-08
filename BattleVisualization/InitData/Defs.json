@@ -1,0 +1,111 @@
+{
+	"Heroes": {
+		"Boyarski": {
+			"UnitType": "Range",
+			"PrefabName": "BoyarskiyHero",
+			"ShootEffect": "GreenShootEffect",
+			"Damage": 30,
+			"Speed": 5,
+			"FireRange": 15,
+			"ShootPerMinute": 60,
+			"Accuracy": 100,
+			"Health": 300
+		},
+		"Nerlag": {
+			"UnitType": "Melee",
+			"PrefabName": "NerlagHero",
+			"ShootEffect": "GreenShootEffect",
+			"Speed": 3,
+			"Damage": 5,
+			"ShootPerMinute": 10,
+			"Health": 600
+		}
+	},
+	"Mobs": {
+		"Solder": {
+			"UnitType": "Melee",
+			"PrefabName": "MeleeMob01",
+			"ShootEffect": "RedShootEffect",
+			"Speed": 3,
+			"FireRange": 3,
+			"ShootPerMinute": 10,
+			"Damage": 5,
+			"Health": 200
+		},
+		"Healler": {
+			"UnitType": "Healer",
+			"PrefabName": "HealerMob01",
+			"ShootEffect": "RedShootEffect",
+			"Speed": 3,
+			"FireRange": 3,
+			"ShootPerMinute": 10,
+			"Damage": 5,
+			"Health": 600
+		}
+	},
+	"Formations": {
+		"Square": {
+			"PrefabName": "SquareFormation",
+			"MinLevel": 1,
+			"MinTownHallLevel": 1
+		},
+		"Line": {
+			"PrefabName": "SquareFormation",
+			"MinLevel": 1,
+			"MinTownHallLevel": 1
+		}
+	},
+	"Buildings": {
+		"Farm0": {
+			"Name": "farmName",
+			"Desc": "farmDesc",			
+			"DefType": "SharedLogic.Defs.Buildings.FarmDef",
+			"Capacity": 1000,
+			"ResPerSecond": 5,
+			"ResourceId" : "Gold",
+			"UpgradeDefId" : "Farm1",
+			"UpgradeExp" : "1000",
+			"UpgradeCost" : {
+				"Gold": 500
+			},
+			"Position" :
+			{
+				"X" : 10,
+				"Y" : 0
+			},
+			"States": {
+				"Upgrade": {
+					"PrefabName" : "BuildingState",
+					"Duration": 2,
+					"NextState": "Idle"
+				},
+				"Idle": {
+					"PrefabName": "Farm"
+				}
+			}
+		},
+		"Farm1": {
+			"Name": "farmName",
+			"Desc": "farmDesc",			
+			"DefType": "SharedLogic.Defs.Buildings.FarmDef",
+			"Capacity": 1000,
+			"ResPerSecond": 10,
+			"ResourceId" : "Gold",
+			"Position" :
+			{
+				"X" : 10,
+				"Y" : 0
+			},
+			"States": {
+				"Upgrade": {
+					"PrefabName" : "BuildingState",
+					"Duration": 30000,
+					"NextState": "Idle"
+				},
+				"Idle": {
+					"PrefabName": "Farm"
+				}
+			}
+		}
+	}
+}

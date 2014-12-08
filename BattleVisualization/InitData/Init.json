@@ -1,0 +1,28 @@
+{
+	"Player": {
+		"GameBalance": {
+			"Gold": 300
+		},
+		"RealBalance": 1000,
+		"Expirience" : 10,
+		"AvailableHeroes" : {
+			"0" : "Boyarski"
+		}
+	},
+	"Location": {
+		"Buildings": {
+			"Farm01": {
+				"CurrentMoney": 555,
+				"MapItemType": "SharedLogic.GameState.Buildings.Farm",
+				"DefId": "Farm0",
+				"State" : {
+					"CurrentState": "Idle",
+					"StateStartTime": 0
+				}
+			}
+		}
+	},
+	"NextCommandId": 1,
+	"LastCommandTime": 0,
+	"Inited": null
+}

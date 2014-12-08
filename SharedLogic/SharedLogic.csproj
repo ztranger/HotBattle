@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{34D85E79-3C34-4338-AEA4-C05E55AAB121}</ProjectGuid>
+    <ProjectGuid>{3F0C3E38-4096-47BA-BFD2-E2AE5FDCA339}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HPG</RootNamespace>
-    <AssemblyName>HPG.Battle</AssemblyName>
+    <RootNamespace>Tanat.SharedLogic</RootNamespace>
+    <AssemblyName>Tanat.SharedLogic</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -36,26 +36,44 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine">
+      <HintPath>C:\Program Files (x86)\Unity\Editor\Data\Managed\UnityEngine.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Battle\Actions\BattleAction.cs" />
-    <Compile Include="Battle\Actions\RequestHero.cs" />
-    <Compile Include="Battle\Bvh.cs" />
-    <Compile Include="Battle\BvhNode.cs" />
-    <Compile Include="Battle\Entities\Hero.cs" />
-    <Compile Include="Battle\Entities\Obstacle.cs" />
-    <Compile Include="Battle\Entities\Unit.cs" />
-    <Compile Include="Battle\IEventHandler.cs" />
-    <Compile Include="Battle\KdTree.cs" />
-    <Compile Include="Battle\MathUtils.cs" />
-    <Compile Include="Battle\State.cs" />
-    <Compile Include="Battle\Vec2.cs" />
+    <Compile Include="Actions\AddPlayerExpAction.cs" />
+    <Compile Include="Actions\CollectResources.cs" />
+    <Compile Include="Actions\GameAction.cs" />
+    <Compile Include="Actions\TickAction.cs" />
+    <Compile Include="Actions\UpgradeBuilding.cs" />
+    <Compile Include="Actions\UpgradeDone.cs" />
+    <Compile Include="Context.cs" />
+    <Compile Include="Defs\Buildings\CurrencyType.cs" />
+    <Compile Include="Defs\Buildings\FarmDef.cs" />
+    <Compile Include="Defs\Buildings\MapItemDef.cs" />
+    <Compile Include="Defs\Const.cs" />
+    <Compile Include="Defs\Currency.cs" />
+    <Compile Include="Defs\StateDef.cs" />
+    <Compile Include="Defs\Units\FormationDef.cs" />
+    <Compile Include="Defs\Units\UnitDef.cs" />
+    <Compile Include="Defs\Units\UnitType.cs" />
+    <Compile Include="Defs\VectorDef.cs" />
+    <Compile Include="GameDefs.cs" />
+    <Compile Include="GameState\Buildings\Farm.cs" />
+    <Compile Include="GameState\Buildings\MapItem.cs" />
+    <Compile Include="GameState\Buildings\ObjectState.cs" />
+    <Compile Include="GameState\DictionarySignalProp.cs" />
+    <Compile Include="GameState\GameState.cs" />
+    <Compile Include="GameState\Player.cs" />
+    <Compile Include="GameState\PlayerLocation.cs" />
+    <Compile Include="GameState\SignalProp.cs" />
+    <Compile Include="LogicRandom.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SharedLogic\SharedLogic.csproj">
-      <Project>{3f0c3e38-4096-47ba-bfd2-e2ae5fdca339}</Project>
-      <Name>SharedLogic</Name>
+    <ProjectReference Include="..\JsonFx.Json\JsonFx.Json.csproj">
+      <Project>{aba23f14-7e47-43fe-a3e7-1ff97840c3fb}</Project>
+      <Name>JsonFx.Json</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
