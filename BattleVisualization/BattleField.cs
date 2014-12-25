@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using SharedLogic.Defs.Units;
 
 namespace BattleVisualization
 {
@@ -10,6 +11,11 @@ namespace BattleVisualization
         readonly List<Unit> _units = new List<Unit>();
 
         public BattleField()
+        {
+            
+        }
+
+        public void AddHero(UnitDef def, int x, int y)
         {
             _units.Add(new Unit());
         }

@@ -14,7 +14,7 @@ namespace BattleVisualization
         protected float _radius = 7;
         protected int _x, _y;
 
-        public Unit()
+        public Unit(int x, int y)
         {
             _tex = TextureStorage.GetTexture("hero");
             _x = 0;
