@@ -129,11 +129,18 @@ namespace JsonFx.Json
 
 		internal Object InstantiateObject(Type objectType, out Dictionary<string, MemberInfo> memberMap)
 		{
-			if (objectType.IsInterface || objectType.IsAbstract || objectType.IsValueType)
+			if (objectType.IsInterface || objectType.IsAbstract/* || objectType.IsValueType*/)
 			{
 				throw new JsonTypeCoercionException(
 					String.Format(TypeCoercionUtility.ErrorCannotInstantiate, objectType.FullName));
 			}
+
+		    if (objectType.IsValueType)
+		    {
+		        Object o = Activator.CreateInstance(objectType);
+                memberMap = this.CreateMemberMap(objectType);
+		        return o;
+		    }
 
 			ConstructorInfo ctor = objectType.GetConstructor(Type.EmptyTypes);
 			if (ctor == null)

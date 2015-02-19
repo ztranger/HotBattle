@@ -476,7 +476,7 @@ namespace JsonFx.Json
 						Type[] genericArgs = genericDictionary.GetGenericArguments();
 						if (genericArgs.Length == 2)
 						{
-							if (genericArgs[0] != typeof(String))
+                            if (genericArgs[0] != typeof(String) && genericArgs[0] != typeof(Int32))
 							{
 								throw new JsonDeserializationException(
 									String.Format(JsonReader.ErrorGenericIDictionaryKeys, objectType),
@@ -562,7 +562,23 @@ namespace JsonFx.Json
 					}
 					else
 					{
-						((IDictionary)result)[memberName] = value;
+					    bool wasSetup = false;
+                        Type genericDictionary = result.GetType().GetInterface(JsonReader.TypeGenericIDictionary);
+                        if (genericDictionary != null)
+                        {
+                            Type[] genericArgs = genericDictionary.GetGenericArguments();
+                            if (genericArgs.Length == 2)
+                            {
+                                if (genericArgs[0] == typeof(Int32))
+                                {
+                                    wasSetup = true;
+
+                                    ((IDictionary)result)[Int32.Parse(memberName)] = value;
+                                }
+                            }
+                        }
+                        if (!wasSetup)
+						    ((IDictionary)result)[memberName] = value;
 					}
 				}
 				else if (objectType.GetInterface(JsonReader.TypeGenericIDictionary) != null)

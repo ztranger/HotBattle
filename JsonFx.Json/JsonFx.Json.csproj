@@ -86,14 +86,13 @@
     <Compile Include="About.cs" />
     <Compile Include="DataReaderProvider.cs" />
     <Compile Include="DataWriterProvider.cs" />
-    <Compile Include="ICustomConverter.cs" />
-    <Compile Include="JsonClassAttribute.cs" />
-    <Compile Include="XmlDataReader.cs" />
-    <Compile Include="IDataReader.cs" />
     <Compile Include="EcmaScriptIdentifier.cs" />
     <Compile Include="EcmaScriptWriter.cs" />
+    <Compile Include="ICustomConverter.cs" />
+    <Compile Include="IDataReader.cs" />
     <Compile Include="IDataWriter.cs" />
     <Compile Include="IJsonSerializable.cs" />
+    <Compile Include="JsonClassAttribute.cs" />
     <Compile Include="JsonDataReader.cs" />
     <Compile Include="JsonDataWriter.cs" />
     <Compile Include="JsonIgnoreAttribute.cs" />
@@ -108,15 +107,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\AssemblyVersion.cs" />
     <Compile Include="TypeCoercionUtility.cs" />
+    <Compile Include="XmlDataReader.cs" />
     <Compile Include="XmlDataWriter.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="License.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Readme.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <EmbeddedResource Include="Scripts\json2.js" />
   </ItemGroup>
   <ItemGroup>
@@ -130,6 +124,10 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="License.txt" />
+    <Content Include="Readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
