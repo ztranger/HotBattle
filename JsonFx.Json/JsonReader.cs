@@ -304,6 +304,31 @@ namespace JsonFx.Json
 			return (T)this.Read(typeof(T), false);
 		}
 
+        public T Deserialize<T>(T baseObject)
+        {
+            // should this run through a preliminary test here?
+            return (T)this.ReadToObject(baseObject);
+        }
+
+	    private object ReadToObject(object baseObject)
+	    {
+	        if (baseObject == null)
+	            return null;
+            JsonToken token = this.Tokenize();
+
+            switch (token)
+            {
+                case JsonToken.ObjectStart:
+                    {
+                        return this.ReadObject(baseObject.GetType(), baseObject);
+                    }
+                default:
+                    {
+                        return null;
+                    }
+            }
+	    }
+
 		private object Read(Type expectedType, bool typeIsHint)
 		{
 			if (expectedType == typeof(Object))
@@ -439,20 +464,23 @@ namespace JsonFx.Json
             return result;
         }
 
-		public object ReadObject(Type objectType)
+		public object ReadObject(Type objectType, object baseObject = null)
 		{
-		    if (objectType != null && !string.IsNullOrEmpty(JsonClassAttribute.GetClassName(objectType)))
+		    if (baseObject == null)
 		    {
-		        string typetoConvert = GetFieldValue(JsonClassAttribute.GetClassName(objectType));
-		        if (!string.IsNullOrEmpty(typetoConvert))
+		        if (objectType != null && !string.IsNullOrEmpty(JsonClassAttribute.GetClassName(objectType)))
 		        {
-		            Type nested;
-		            if (this.typeCreator != null)
-		                nested = this.typeCreator(typetoConvert);
-                    else 
-                        nested = Type.GetType(typetoConvert);
-                    if(objectType != null)
-		                objectType = nested;
+		            string typetoConvert = GetFieldValue(JsonClassAttribute.GetClassName(objectType));
+		            if (!string.IsNullOrEmpty(typetoConvert))
+		            {
+		                Type nested;
+		                if (this.typeCreator != null)
+		                    nested = this.typeCreator(typetoConvert);
+		                else
+		                    nested = Type.GetType(typetoConvert);
+		                if (objectType != null)
+		                    objectType = nested;
+		            }
 		        }
 		    }
 		    if (this.Source[this.index] != JsonReader.OperatorObjectStart)
@@ -465,9 +493,17 @@ namespace JsonFx.Json
 			Object result;
 			if (objectType != null)
 			{
-				result = this.Settings.Coercion.InstantiateObject(objectType, out memberMap);
+			    if (baseObject == null)
+			    {
+			        result = this.Settings.Coercion.InstantiateObject(objectType, out memberMap);
+			    }
+			    else
+			    {
+                    memberMap = this.Settings.Coercion.CreateMemberMap(objectType);
+			        result = baseObject;
+			    }
 
-				if (memberMap == null)
+			    if (memberMap == null)
 				{
 					// this allows specific IDictionary<string, T> to deserialize T
 					Type genericDictionary = objectType.GetInterface(JsonReader.TypeGenericIDictionary);
@@ -1050,6 +1086,11 @@ namespace JsonFx.Json
 		{
 			return (T)JsonReader.Deserialize(value, 0, typeof(T), null);
 		}
+
+        public static T Deserialize<T>(string value, T baseObject)
+        {
+            return (new JsonReader(value)).Deserialize<T>(baseObject);
+        }
 
         public static T Deserialize<T>(string value, Func<string, Type> typeCreator)
         {

@@ -17,7 +17,7 @@ namespace BattleVisualization
 
         public void AddHero(UnitDef def, int x, int y)
         {
-            _units.Add(new Unit());
+            //_units.Add(new Unit());
         }
 
         public void Draw()

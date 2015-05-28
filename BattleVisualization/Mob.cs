@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BattleVisualization
 {
-    class Mob : Unit
+    /*class Mob : Unit
     {
-    }
+    }*/
 }
